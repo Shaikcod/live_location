@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Location</title>
+    <link rel="icon" type="image/x-icon" href="./images/location_icon.png">
+</head>
+    
+<body>
+
+    <div id="map" style= "text-align : center ; margin-bottom: 50px;"></div>
+    <div id="details" style= "text-align : center"></div>
+    <script>
+//        navigator.geolocation.getCurrentPosition(position => {
+//   const { latitude, longitude } = position.coords;
+//   // Show a map centered at latitude / longitude.
+//   map.innerHTML = '<iframe position="center" width="700" height = "500" src="https://maps.google.com/maps?q='+latitude+','+longitude+'&amp ; z=15&amp;output=embed"><iframe>' ;
+    
+// });
+
+var reqCount = 0;
+
+const watchId = navigator.geolocation.watchPosition(position => {
+   const { latitude, longitude } = position.coords;
+  // Show a map centered at latitude / longitude.
+
+    map.innerHTML = '<iframe position="center" width="700" height = "500" src="https://maps.google.com/maps?q='+latitude+','+longitude+'&amp ; z=15&amp;output=embed"><iframe>' ;
+    
+console.log(watchId);
+
+navigator.geolocation.watchPosition(successCallback,errorCallBack,options);
+
+function successCallback(position){
+    const{ accuracy , latitude ,longitude , altitude ,heading ,speed } = position.coords;
+
+    reqCount++;
+    details.innerHTML = "Accuracy: "+accuracy+"<br>";
+    details.innerHTML += "Latitude: "+latitude+"<br>";
+    details.innerHTML += "Altitude: "+altitude+"<br>";
+    details.innerHTML += "Heading : "+heading+"<br>";
+    details.innerHTML += "Speed: "+speed+"<br>";
+    details.innerHTML += "reqcount: "+reqCount;
+
+
+}
+function errorCallBack(error){
+    
+}
+
+var options = {
+    // enableHighAccuracy: False,
+    // timeout: 5000,
+    // maximumAge: 0
+};
+
+});
+
+
+    </script>
+  
+</body>
+</html>
